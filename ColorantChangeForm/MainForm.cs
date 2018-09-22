@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using ColorantChangeForm.DB;
 using ColorantChangeForm.Search;
 using ColorantChangeForm.UpLoad;
+using NPOI.SS.Formula.Functions;
 
 namespace ColorantChangeForm
 {
@@ -88,25 +89,31 @@ namespace ColorantChangeForm
         {
             try
             {
-                if(txtColorant.Text=="" || txtAkzoColorant.Text== "" || txtValue.Text=="") throw new Exception("请填上三华色母及浓度系数后再继续");
-                if(Convert.ToInt32(txtValue.Text)==0)throw new Exception("所填写的浓度系数必须大于0");
+                if(txtColorant.Text=="" || txtAkzoColorant.Text== "") throw new Exception("请使用三华色母明细查询功能");
+                if ( txtValue.Text=="0") throw new Exception("请输入浓度系数大于0的值");
 
                 //将所需的值赋到Task类内
                 task.TaskId = 4;
-
+                task.Colorant = txtColorant.Text;
+                task.AkzoColorant = txtAkzoColorant.Text;
+                task.Value = Convert.ToDecimal(txtValue.Text);
 
                 //使用子线程工作(作用:通过调用子线程进行控制LoadForm窗体的关闭情况)
                 new Thread(Start).Start();
                 load.StartPosition = FormStartPosition.CenterScreen;
                 load.ShowDialog();
 
-                if (task.ExDataTable.Rows.Count == 0) throw new Exception(string.Format($"没有查询记录,请检查此" +
-                                                                                        $"'{0}'色母编码是否有对应的Akzo色母",txtColorant.Text));
+                if (task.ExDataTable.Rows.Count == 0)
+                    throw new Exception(string.Format($"没有查询记录,请检查此" +
+                                                        $"'{0}'色母编码是否有对应的Akzo色母", txtColorant.Text));
                 gvdtl.DataSource = task.ExDataTable;
+                label4.Text = "查询的记录数为:" + gvdtl.Rows.Count + "行";
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtValue.Text = "";
             }
         }
 

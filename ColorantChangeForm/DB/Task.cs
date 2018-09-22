@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Threading;
+using ColorantChangeForm.DB.Generate;
 using ColorantChangeForm.DB.Search;
 using ColorantChangeForm.DB.UpLoad;
 
@@ -9,6 +10,7 @@ namespace ColorantChangeForm.DB
     {
         Excel _excel = new Excel();
         SearchDtl search=new SearchDtl();
+        GenerateRecord gen=new GenerateRecord();
 
         private string _fileAddress;
         private string _tablename;
@@ -19,6 +21,9 @@ namespace ColorantChangeForm.DB
         private int _brandid;
         private int _connectiontype;
         private int _searchTypeId;
+        private string _colorant;
+        private string _akzoColorant;
+        private decimal _value;
 
         /// <summary>
         /// 中转ID
@@ -55,6 +60,20 @@ namespace ColorantChangeForm.DB
         /// </summary>
         public int SearchTypeId {set { _searchTypeId = value; }}
 
+        /// <summary>
+        /// 接收三华色母(运算功能使用)
+        /// </summary>
+        public string Colorant { set { _colorant = value; } }
+
+        /// <summary>
+        /// 接收AKZO色母(运算功能使用)
+        /// </summary>
+        public string AkzoColorant { set { _akzoColorant = value; } }
+
+        /// <summary>
+        /// 接收浓度系数(运算功能使用)
+        /// </summary>
+        public decimal Value { set { _value = value; } }
 
 
 
@@ -94,7 +113,7 @@ namespace ColorantChangeForm.DB
                     break;
                 //计算色母量
                 case 4:
-
+                    GetRecordToDataTable(_colorant,_akzoColorant,_value);
                     break;
                 //更新(包括录入端;国内查询端及海外查询端)
                 case 5:
@@ -134,6 +153,17 @@ namespace ColorantChangeForm.DB
         private void SearchColorantRecord(int connectiontype, int searchTypeId, int brandId)
         {
             _excelTable = search.SearchColorantRecord(connectiontype,searchTypeId,brandId);
+        }
+
+        /// <summary>
+        /// 计算色母量
+        /// </summary>
+        /// <param name="colorant"></param>
+        /// <param name="akzoColorant"></param>
+        /// <param name="value"></param>
+        private void GetRecordToDataTable(string colorant, string akzoColorant, decimal value)
+        {
+            _excelTable= gen.GetRecordToDataTable(colorant, akzoColorant, value);
         }
 
 

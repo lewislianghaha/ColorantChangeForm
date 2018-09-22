@@ -71,33 +71,33 @@ namespace ColorantChangeForm.Search
                 }
 
                 //创建行内容
-                for (var j = 1; j <= 6; j++)
+                for (var j = 0; j < 6; j++)
                 {
                     var dr = dt.NewRow();
 
                     switch (j)
                     {
-                        case 1:
+                        case 0:
                             dr[0] = "0";
                             dr[1] = "EC";
                             break;
-                        case 2:
+                        case 1:
                             dr[0] = "1";
                             dr[1] = "GD";
                             break;
-                        case 3:
+                        case 2:
                             dr[0] = "2";
                             dr[1] = "KYD";
                             break;
-                        case 4:
+                        case 3:
                             dr[0] = "3";
                             dr[1] = "MAX";
                             break;
-                        case 5:
+                        case 4:
                             dr[0] = "4";
                             dr[1] = "PC";
                             break;
-                        case 6:
+                        case 5:
                             dr[0] = "5";
                             dr[1] = "SW";
                             break;

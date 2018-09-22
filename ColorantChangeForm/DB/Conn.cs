@@ -30,7 +30,7 @@ namespace ColorantChangeForm.DB
                     uid = "sa";
                     pwd = "8990489he";
                     break;
-                case 1: //三华录入端(国内)
+                case 1: //三华录入端(国内) 作用:查询&&更新
                     ip = "113.108.95.73";
                     dataBase = "AutoPaint_Integrated";
                     uid = "sa";
