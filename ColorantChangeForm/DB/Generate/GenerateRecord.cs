@@ -46,7 +46,6 @@ namespace ColorantChangeForm.DB.Generate
                                                             )
                                             ORDER BY C.VersionDate DESC
                                           ";
-
         #endregion
 
         Conn conn =new Conn();
@@ -188,7 +187,7 @@ namespace ColorantChangeForm.DB.Generate
         /// <summary>
         /// 根据指定的三华色母获取对应的三华色号记录
         /// </summary>
-        /// <param name="colorant"></param>
+        /// <param name="colorant">三华色母</param>
         /// <returns></returns>
         private DataTable GetInnerCode(string colorant)
         {
@@ -213,7 +212,7 @@ namespace ColorantChangeForm.DB.Generate
         /// 获取色号对照表以及AKZO色母量信息
         /// (注:1)AKZO号必须在Color表内存在 2)要确保所定指定AKZO色母在此范围内并找到AKZO色母量) 
         /// </summary>
-        /// <param name="akzoColorant"></param>
+        /// <param name="akzoColorant">Akzo色母</param>
         /// <returns></returns>
         private DataTable GetAkzoCode(string akzoColorant)
         {

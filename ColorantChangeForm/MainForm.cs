@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using ColorantChangeForm.DB;
 using ColorantChangeForm.Search;
 using ColorantChangeForm.UpLoad;
-using NPOI.SS.Formula.Functions;
 
 namespace ColorantChangeForm
 {
@@ -62,7 +61,10 @@ namespace ColorantChangeForm
         /// <param name="e"></param>
         private void Tmsearch_Click(object sender, EventArgs e)
         {
+            if (txtValue.Text != "") txtValue.Text = "";
+
             var sanTint = new SearchSanTintColorant();
+            sanTint.StartPosition=FormStartPosition.CenterScreen;
             sanTint.ShowDialog();
             txtColorant.Text = sanTint.ColorantCode;
             txtAkzoColorant.Text = sanTint.AkzoColorant;
@@ -89,7 +91,7 @@ namespace ColorantChangeForm
         {
             try
             {
-                if(txtColorant.Text=="" || txtAkzoColorant.Text== "") throw new Exception("请使用三华色母明细查询功能");
+                if (txtColorant.Text=="" || txtAkzoColorant.Text== "") throw new Exception("请使用三华色母明细查询功能");
                 if ( txtValue.Text=="0") throw new Exception("请输入浓度系数大于0的值");
 
                 //将所需的值赋到Task类内
