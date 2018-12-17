@@ -31,6 +31,7 @@ namespace ColorantChangeForm
             btnGenerate.Click += BtnGenerate_Click;
             tmUpLoadColorant.Click += TmUpLoadColorant_Click;
             tmUploadColorCode.Click += TmUploadColorCode_Click;
+            toolStripMenuItem1.Visible = false;
         }
 
         /// <summary>

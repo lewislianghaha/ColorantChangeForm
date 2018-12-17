@@ -15,10 +15,10 @@ namespace ColorantChangeForm.DB.UpLoad
         /// <summary>
         /// 找开EXCEL并将结果集以DATASET型式返回
         /// </summary>
-        /// <param name="filename"></param>
+        /// <param name="fileAddress"></param>
         /// <param name="tableName"></param>
         /// <returns></returns>
-        public DataTable OpenExcel(string filename,string tableName)
+        public DataTable OpenExcel(string fileAddress,string tableName)
         {
             var importExcelDt = new DataTable();
             var dt = new DataTable();
@@ -26,7 +26,7 @@ namespace ColorantChangeForm.DB.UpLoad
             try
             {
                 //使用NPOI技术进行导入EXCEL至DATATABLE
-                importExcelDt = OpenExcelToDataTable(filename,tableName);
+                importExcelDt = OpenExcelToDataTable(fileAddress,tableName);
                 //将从EXCEL过来的记录集为空的行清除
                 dt = RemoveEmptyRows(importExcelDt);
             }
@@ -42,15 +42,15 @@ namespace ColorantChangeForm.DB.UpLoad
         ///  <summary>
         /// 读取EXCEL内容到DATATABLE内
         ///  </summary>
-        ///  <param name="filename"></param>
+        ///  <param name="fileAddress"></param>
         /// <param name="tableName"></param>
         /// <returns></returns>
-        private DataTable OpenExcelToDataTable(string filename,string tableName)
+        private DataTable OpenExcelToDataTable(string fileAddress,string tableName)
         {
             IWorkbook wk;
             var dt = new DataTable();
             
-            using (var fsRead = File.OpenRead(filename))
+            using (var fsRead = File.OpenRead(fileAddress))
             {
                 wk = new XSSFWorkbook(fsRead);
                 //获取第一个sheet
